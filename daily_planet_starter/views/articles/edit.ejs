@@ -1,0 +1,14 @@
+<h2>Edit Article</h2>
+
+<form action="/articles/edit/<%= id %>" id="edit-article" role="form">
+	<div class="form-group">
+		<label>Article Name</label>
+		<input id="myTitle" type="text" name="title" class="form-control" value="<%= article.title %>">
+	</div>
+	<div class="form-group">
+		<label>Article Text</label>
+		<textarea id="myArticle" type="text" name="body" class="form-control"><%= article.body %>
+		</textarea>
+	</div>
+	<input type="submit" value="Save Article" class="btn btn-success">
+</form>

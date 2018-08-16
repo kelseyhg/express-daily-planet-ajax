@@ -28,10 +28,11 @@ app.get('/articles/new', function(req, res) {
 
 app.get('/articles/:index', function(req, res) {
     var index = parseInt(req.params.index);
+    console.log(index);
     if (index < articles.length && index >= 0) {
-        res.render('articles/show', { article: articles[req.params.index] });
+        res.render('articles/show', { article: articles[req.params.index], id: index });
     } else {
-        res.send('Error');
+        res.redirect('/articles');
     }
 });
 
@@ -43,6 +44,30 @@ app.post('/articles', function(req, res) {
 app.get('/about', function(req, res) {
     res.render('about');
 });
+
+app.delete("/articles/:id", function(req, res){
+    res.send("deleting");
+});
+
+app.put('/articles/:id', function(req, res){
+    var articleId = req.params.id;
+    console.log(articleId);
+    articles[articleId].title = req.body.title;
+    articles[articleId].body = req.body.body;
+    res.redirect("/articles/:id");
+})
+
+app.get('/articles/:index/edit', function(req, res) {
+     var index = parseInt(req.params.index);
+     console.log(index);
+    if (index < articles.length && index >= 0) {
+        res.render('articles/edit', { article: articles[req.params.index], id: index });
+    } else {
+        res.send('Error');
+    }
+}); 
+
+
 
 app.listen(3000, function() {
     console.log("You're listening to the smooth sounds of port 3000 in the morning");
